@@ -1,98 +1,188 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+    <div className="container">
+      {/* Header Section */}
+      <header className="header">
+        <div className="react-logo">
+          <Image
+            src="/images/partial-react-logo.png"
+            alt="React Logo"
+            width={290}
+            height={178}
+            style={{ 
+              position: 'absolute',
+              bottom: 0,
+              left: 0
+            }}
+          />
+        </div>
+      </header>
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+      {/* Main Content */}
+      <main className="content">
+        <div className="title-container">
+          <h1 className="title">Welcome!</h1>
+          <div className="wave">👋</div>
+        </div>
+
+        <div className="step-container">
+          <h2 className="subtitle">Step 1: Try it</h2>
+          <p>
+            Edit <strong>app/page.tsx</strong> to see changes.
+            Press{' '}
+            <strong>
+              {typeof window !== 'undefined' && navigator.platform.includes('Mac') 
+                ? 'cmd + d' 
+                : 'F12'
+              }
+            </strong>{' '}
+            to open developer tools.
+          </p>
+        </div>
+
+        <div className="step-container">
+          <Link href="/explore" className="explore-link">
+            <h2 className="subtitle">Step 2: Explore</h2>
+          </Link>
+          <p>
+            Tap the Explore tab to learn more about what&apos;s included in this starter app.
+          </p>
+        </div>
+
+        <div className="step-container">
+          <h2 className="subtitle">Step 3: Get a fresh start</h2>
+          <p>
+            When you&apos;re ready, run <code>npm run reset-project</code> to get a fresh{' '}
+            <code>app</code> directory. This will move the current <code>app</code> to{' '}
+            <code>app-example</code>.
+          </p>
+        </div>
+      </main>
+
+      <style jsx>{`
+        .container {
+          min-height: 100vh;
+          background: linear-gradient(to bottom, #A1CEDC, #ffffff);
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .container {
+            background: linear-gradient(to bottom, #1D3D47, #000000);
+          }
+        }
+
+        .header {
+          position: relative;
+          height: 200px;
+          overflow: hidden;
+        }
+
+        .react-logo {
+          position: relative;
+          height: 100%;
+        }
+
+        .content {
+          padding: 20px;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .title-container {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 24px;
+        }
+
+        .title {
+          font-size: 2rem;
+          font-weight: bold;
+          margin: 0;
+          color: #1a1a1a;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .title {
+            color: #ffffff;
+          }
+        }
+
+        .wave {
+          font-size: 1.5rem;
+          animation: wave 2s infinite;
+        }
+
+        @keyframes wave {
+          0%, 100% { transform: rotate(0deg); }
+          25% { transform: rotate(20deg); }
+          75% { transform: rotate(-10deg); }
+        }
+
+        .step-container {
+          margin-bottom: 24px;
+          padding: 16px;
+          background: rgba(255, 255, 255, 0.8);
+          border-radius: 8px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+          .step-container {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+
+        .subtitle {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin: 0 0 8px 0;
+          color: #0a7ea4;
+        }
+
+        .explore-link {
+          text-decoration: none;
+          color: inherit;
+        }
+
+        .explore-link:hover {
+          opacity: 0.8;
+        }
+
+        p {
+          margin: 0;
+          line-height: 1.5;
+          color: #333;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          p {
+            color: #ccc;
+          }
+        }
+
+        strong {
+          font-weight: 600;
+        }
+
+        code {
+          background: #f4f4f4;
+          padding: 2px 6px;
+          border-radius: 4px;
+          font-family: monospace;
+          font-size: 0.9em;
+        }
+
+        @media (prefers-color-scheme: dark) {
+          code {
+            background: #2a2a2a;
+            color: #fff;
+          }
+        }
+      `}</style>
+    </div>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
