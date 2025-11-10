@@ -1,6 +1,6 @@
+cat > app/explore/page.tsx << 'EOF'
 'use client';
 import Link from 'next/link';
-import React from 'react';
 
 export default function ExplorePage() {
   return (
@@ -28,3 +28,4 @@ export default function ExplorePage() {
     </div>
   );
 }
+EOF
