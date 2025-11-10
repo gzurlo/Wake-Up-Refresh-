@@ -1,6 +1,4 @@
-cat > app/explore/page.tsx << 'EOF'
 'use client';
-
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -25,7 +23,6 @@ export default function ExplorePage() {
       <h1>Explore</h1>
       <p>This app includes example code to help you get started.</p>
 
-      {/* File-based routing */}
       <div style={{ border: '1px solid #ddd', borderRadius: 8, margin: '16px 0', overflow: 'hidden' }}>
         <button 
           onClick={() => toggleSection('routing')}
@@ -63,4 +60,3 @@ export default function ExplorePage() {
     </div>
   );
 }
-EOF

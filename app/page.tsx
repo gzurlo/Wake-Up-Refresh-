@@ -1,4 +1,3 @@
-cat > app/page.tsx << 'EOF'
 'use client';
 
 export default function HomePage() {
@@ -12,4 +11,3 @@ export default function HomePage() {
     </div>
   );
 }
-EOF

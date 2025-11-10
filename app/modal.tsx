@@ -1,6 +1,4 @@
-cat > app/modal.tsx << 'EOF'
 'use client';
-
 import Link from 'next/link';
 
 export default function ModalScreen() {
@@ -22,4 +20,3 @@ export default function ModalScreen() {
     </div>
   );
 }
-EOF

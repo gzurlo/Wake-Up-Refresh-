@@ -1,5 +1,5 @@
-cat > app/layout.tsx << 'EOF'
 import type { Metadata } from 'next';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Wake Up Refresh',
@@ -19,4 +19,3 @@ export default function RootLayout({
     </html>
   );
 }
-EOF
