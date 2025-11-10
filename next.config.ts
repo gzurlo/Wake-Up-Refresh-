@@ -7,10 +7,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true
   },
-  // Add this if you're using environment variables
-  env: {
-    customKey: 'my-value',
-  },
+  // Disable server-side features for static export
+  experimental: {
+    esmExternals: true,
+  }
 };
 
 export default nextConfig;
